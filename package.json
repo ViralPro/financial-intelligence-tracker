@@ -1,0 +1,31 @@
+{
+  "name": "financial-intelligence-tracker",
+  "version": "1.0.0",
+  "description": "Financial Intelligence Tracker - Monitoring, verification and regulatory tracking for Interactive Brokers, Exness and TradingView",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node src/tests/run_all_tests.js",
+    "test:db": "node src/tests/test_db.js",
+    "test:api": "node src/tests/test_api.js",
+    "test:research": "node src/tests/test_research.js",
+    "test:gemini": "node src/tests/test_gemini.js",
+    "db:init": "node database/init.js",
+    "mysql:start": "powershell -Command \"Start-Process 'C:\\xampp\\mysql\\bin\\mysqld.exe' -ArgumentList '--defaults-file=C:\\xampp\\mysql\\bin\\my.ini --standalone' -WorkingDirectory 'C:\\xampp\\mysql' -WindowStyle Hidden; Start-Sleep -Seconds 2; Write-Host '✓ MySQL iniciado correctamente en 127.0.0.1:3306'\"",
+    "mysql:stop": "powershell -Command \"Stop-Process -Name mysqld -Force -ErrorAction SilentlyContinue; Write-Host '✓ MySQL detenido'\""
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

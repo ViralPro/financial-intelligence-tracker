@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Intelligence Tracker</title>
+  <meta name="description" content="Monitoreo, verificación regulatoria e inteligencia financiera para Interactive Brokers, Exness y TradingView.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Barra Superior / Encabezado -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-container" id="logo-home">
+        <span class="logo-badge">FIT</span>
+        <div>
+          <span class="logo-title">Financial Intelligence Tracker</span>
+          <span class="logo-sub">Monitoreo Regulatorio &bull; Fuentes Oficiales</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div id="gemini-indicator" class="gemini-indicator" title="Estado de la integración de Inteligencia Artificial">
+          IA: Gemini (Verificando...)
+        </div>
+        <button class="btn" id="btn-refresh-data" title="Refrescar datos actuales de la base de datos">
+          Actualizar
+        </button>
+        <button class="btn btn-primary" id="btn-open-research-modal">
+          Iniciar Investigación Manual
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="main-layout">
+
+    <!-- VISTA PRINCIPAL: Tarjetas de las 3 Empresas y Bloques Inferiores -->
+    <div id="home-view">
+      
+      <!-- Sección: Tres Empresas Monitoreadas -->
+      <section style="margin-bottom: 30px;">
+        <h1 class="section-title">Empresas Monitoreadas</h1>
+        <div class="companies-grid" id="companies-grid">
+          <!-- Renderizado dinámico de Interactive Brokers, Exness y TradingView -->
+          <div class="content-box" style="grid-column: 1 / -1; text-align: center; padding: 24px;">
+            Cargando empresas registradas...
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección: Novedades Recientes y Cambios Detectados (Versión Anterior vs Nueva) -->
+      <section class="dashboard-sections" id="news-and-changes-container">
+        <!-- Renderizado dinámico de novedades y diferencias históricas -->
+      </section>
+
+      <!-- Sección: Datos Pendientes de Verificar -->
+      <section style="margin-bottom: 32px;" id="pending-container">
+        <!-- Renderizado dinámico de elementos pendientes -->
+      </section>
+
+      <!-- Sección: Apartado de Fuentes Oficiales Argentinas (CNV, ARCA, BCRA) -->
+      <section id="argentina-container">
+        <!-- Renderizado dinámico de fuentes y normativas argentinas -->
+      </section>
+
+    </div>
+
+    <!-- VISTA SECUNDARIA: Ficha Completa de Empresa (9 Pestañas) -->
+    <div id="profile-view" class="profile-view">
+      <!-- Renderizado dinámico de la ficha de la empresa seleccionada -->
+    </div>
+
+  </main>
+
+  <!-- Modal: Investigación Manual y Verificación de Fuentes -->
+  <div class="modal-overlay" id="research-modal" role="dialog" aria-modal="true" aria-labelledby="research-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="research-modal-title">Módulo de Investigación y Verificación</h3>
+        <button class="modal-close" aria-label="Cerrar ventana">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          Este proceso realiza consultas directas a los servidores públicos de los reguladores (SEC, FCA, CySEC) y portales oficiales para corroborar firmas, detectar alteraciones documentales mediante hash SHA-256 y actualizar el estado de verificación.
+        </p>
+
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 16px;">
+          <label for="modal-research-scope" style="font-size: 13px; font-weight: 500;">Alcance de la revisión:</label>
+          <select id="modal-research-scope" style="padding: 6px 10px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 13px;">
+            <option value="ALL">Todas las empresas (3) y fuentes</option>
+            <option value="interactive-brokers">Solo Interactive Brokers</option>
+            <option value="exness">Solo Exness</option>
+            <option value="tradingview">Solo TradingView</option>
+          </select>
+        </div>
+
+        <div id="modal-research-status"></div>
+
+        <div id="modal-sources-errors" style="margin-top: 16px;">
+          <!-- Lista de fuentes con fallas y opción de reintento -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" id="btn-modal-close">Cerrar</button>
+        <button class="btn btn-primary" id="btn-modal-run-research">Ejecutar Verificación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Análisis y Resumen con Gemini -->
+  <div class="modal-overlay" id="ai-modal" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="ai-modal-title">Análisis de Documento</h3>
+        <button class="modal-close" id="ai-modal-close" aria-label="Cerrar ventana">&times;</button>
+      </div>
+      <div class="modal-body" id="ai-modal-body">
+        <!-- Contenido generado dinámicamente -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn" id="ai-modal-footer-close">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de Página -->
+  <footer class="site-footer">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p><strong>Financial Intelligence Tracker</strong> &mdash; Sistema de seguimiento y verificación de entidades financieras.</p>
+      <p style="margin-top: 4px; font-size: 11px;">
+        Las verificaciones regulatorias reflejan información pública obtenida de portales oficiales. No constituye asesoramiento legal ni financiero.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts Modulares (Vanilla JavaScript ES Modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
